@@ -6,6 +6,8 @@ use PHPUnit\Framework\TestCase;
 final class ChecklistTest extends TestCase {
     protected $client;
 
+    protected $link = '/api/checklist';
+
     protected function setUp(): void {
         $this->client = new GuzzleHttp\Client([
             'base_uri' => 'http://api.local:44'
@@ -13,7 +15,7 @@ final class ChecklistTest extends TestCase {
     }
 
     public function testLengthContentEqualNeed(): void {
-        $response = $this->client->post('/api/CheckListController', [
+        $response = $this->client->post($this->link, [
             'form_params' => [
                 'content'    => 'banana jsdlfjsd banana sd fds sdf sf sdf'
             ]
@@ -25,7 +27,7 @@ final class ChecklistTest extends TestCase {
     }
 
     public function testLengthContentLessNeed(): void {
-        $response = $this->client->post('/api/CheckListController', [
+        $response = $this->client->post($this->link, [
             'form_params' => [
                 'content'    => 'banana jsdlfjsd banana sd'
             ]
@@ -38,7 +40,7 @@ final class ChecklistTest extends TestCase {
     }
 
     public function testAveragekeywordsDensity(): void {
-        $response = $this->client->post('/api/CheckListController', [
+        $response = $this->client->post($this->link, [
             'form_params' => [
                 'content'    => 'banana jsdlfjsd banana sd dsf sfd'
             ]
